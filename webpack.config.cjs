@@ -47,6 +47,11 @@ module.exports = {
           filename: 'images/[hash][ext]',
         }
       },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
     ],
   },
 };
