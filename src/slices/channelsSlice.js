@@ -1,4 +1,4 @@
-import { createSlice, createAction, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes.js';
 
@@ -10,16 +10,16 @@ const getAuthHeader = () => {
 
 export const setInitialStateAsync = createAsyncThunk(
   'channelsInfo/setInitialState',
-  async (payload) => {
-  const { data } = await axios.get(routes.channelsPath(), { headers: getAuthHeader() });
-  console.log(data)
-  return data;
-  }
+  async () => {
+    const { data } = await axios.get(routes.channelsPath(), { headers: getAuthHeader() });
+    return data;
+  },
 );
 
 const initialState = {
   channels: [],
   currentChannelId: null,
+  messages: [],
 };
 
 export const channelsSlice = createSlice({
@@ -27,7 +27,7 @@ export const channelsSlice = createSlice({
   initialState,
   reducers: {
     setCurrentChannel: (state, { payload }) => {
-      const { id } = payload
+      const { id } = payload;
       state.currentChannelId = id;
     },
   },

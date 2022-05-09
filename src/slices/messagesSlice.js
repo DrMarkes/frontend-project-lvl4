@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setInitialStateAsync } from './channelsSlice.js';
 
 const initialState = {
   messages: [],
@@ -7,10 +8,16 @@ const initialState = {
 const messagesSlice = createSlice({
   name: 'messagesInfo',
   initialState,
-  reducers: {
-
-  }
+  extraReducers: (builder) => {
+    builder
+      .addCase(setInitialStateAsync.fulfilled, (state, action) => {
+        const { messages } = action.payload;
+        state.messages = messages;
+      });
+  },
 });
+
+export const selectorMessagesInfo = (state) => state.messagesInfo;
 
 export const { actions } = messagesSlice;
 
