@@ -8,6 +8,11 @@ const initialState = {
 const messagesSlice = createSlice({
   name: 'messagesInfo',
   initialState,
+  reducers: {
+    addMessage: (state, { payload }) => {
+      state.messages = [...state.messages, payload];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(setInitialStateAsync.fulfilled, (state, action) => {

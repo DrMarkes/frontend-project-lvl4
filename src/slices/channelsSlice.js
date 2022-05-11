@@ -19,7 +19,6 @@ export const setInitialStateAsync = createAsyncThunk(
 const initialState = {
   channels: [],
   currentChannelId: null,
-  messages: [],
 };
 
 export const channelsSlice = createSlice({
